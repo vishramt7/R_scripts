@@ -1,0 +1,40 @@
+library(pROC)
+
+# data <- read.table("D:/Data_Medgenome/BMI_PRS_ROC/NW_UW_GSA.txt", header = FALSE)
+# data2 <- read.table("D:/Data_Medgenome/BMI_PRS_ROC/NW_OW_GSA.txt", header = FALSE)
+data3 <- read.table("D:/Data_Medgenome/BMI_PRS_ROC/NW_OB_Combined_data.txt", header = FALSE)
+
+# rocobj <- roc(data[,1], data[,2], print.auc=TRUE)
+# sensitivity <- coords(rocobj, x = "all", ret=c("sensitivity"))
+# specificity <- coords(rocobj, x = "all", ret=c("specificity"))
+# median_sens_UW <- (median(sensitivity$sensitivity))
+# median_spec_UW <- (median(specificity$specificity))
+# 
+# rocobj2 <- roc(data2[,1], data2[,2], print.auc=TRUE)
+# sensitivity2 <- coords(rocobj2, x = "all", ret=c("sensitivity"))
+# specificity2 <- coords(rocobj2, x = "all", ret=c("specificity"))
+# median_sens_OW <- (median(sensitivity2$sensitivity))
+# median_spec_OW <- (median(specificity2$specificity))
+
+rocobj3 <- roc(data3[,1], data3[,2], print.auc=TRUE)
+sensitivity3 <- coords(rocobj3, x = "all", ret=c("sensitivity"))
+specificity3 <- coords(rocobj3, x = "all", ret=c("specificity"))
+median_sens_OB <- (median(sensitivity3$sensitivity))
+median_spec_OB <- (median(specificity3$specificity))
+
+jpeg("D:/R_scripts/BMI_ROC_Combined_data.jpg",units="in", width=4, height=4, res=600)
+# plot(rocobj, print.auc=TRUE,col="red")
+# par(new=TRUE)
+# plot(rocobj2, print.auc=TRUE,print.auc.x = 0.5,print.auc.y = 0.4, col="green")
+# par(new=TRUE)
+plot(rocobj3, print.auc=TRUE,print.auc.x = 0.5,print.auc.y = 0.3, col="blue")
+
+legend("bottomright", legend=c("Obese"), col=c("blue"),lty=1:1,cex=1.0)
+dev.off()
+
+# print (median_sens_UW)
+# print (median_spec_UW)
+# print (median_sens_OW)
+# print(median_spec_OW)
+print(median_sens_OB)
+print(median_spec_OB)
